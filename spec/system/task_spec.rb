@@ -14,12 +14,14 @@ RSpec.describe 'Task', type: :system do
         expect(current_path).to eq project_tasks_path(project)
       end
 
-      it 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
+      fit 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
         # FIXME: テストが失敗するので修正してください
         project = FactoryBot.create(:project)
         task = FactoryBot.create(:task, project_id: project.id)
         visit project_path(project)
         click_link 'View Todos'
+        handle = page.driver.browser.window_handles.last
+        page.driver.browser.switch_to.window(handle)
         expect(page).to have_content task.title
         expect(Task.count).to eq 1
         expect(current_path).to eq project_tasks_path(project)
@@ -101,7 +103,7 @@ RSpec.describe 'Task', type: :system do
   describe 'Task削除' do
     context '正常系' do
       # FIXME: テストが失敗するので修正してください
-      fit 'Taskが削除されること' do
+      it 'Taskが削除されること' do
         project = FactoryBot.create(:project)
         task = FactoryBot.create(:task, project_id: project.id)
         visit project_tasks_path(project)
