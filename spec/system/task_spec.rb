@@ -87,7 +87,7 @@ RSpec.describe 'Task', type: :system do
   describe 'Task削除' do
     let!(:task) { create(:task, project_id: project.id) }
     context '正常系' do
-      fit 'Taskが削除されること' do
+      it 'Taskが削除されること' do
         visit project_tasks_path(project)
         click_link 'Destroy'
         page.driver.browser.switch_to.alert.accept
