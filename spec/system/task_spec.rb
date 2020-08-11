@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 
 RSpec.describe 'Task', type: :system do
   let!(:project) { create(:project) }
